@@ -95,7 +95,7 @@ async function showMovieDetails(movieId) {
     movieDetailsContent.innerHTML = `
       <img src="${posterPath}" alt="${movie.title} Poster" class="detail-poster">
       <h2>${movie.title} (${movie.release_date ? movie.release_date.substring(0, 4) : 'N/A'})</h2>
-      <p><strong>Rating:</strong> ${movie.vote_average ?? movie.vote_average.toFixed(1)}/10 (${movie.vote_count} votes)</p>
+      <p><strong>Rating:</strong> ${movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"}/10 (${movie.vote_count} votes)</p>
       <p><strong>Genre:</strong> ${genres || 'N/A'}</p>
       <p><strong>Durasi:</strong> ${runtime}</p>
       <p><strong>Plot:</strong> ${movie.overview || 'Sinopsis tidak tersedia.'}</p>
