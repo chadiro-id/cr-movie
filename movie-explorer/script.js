@@ -106,3 +106,15 @@ async function showMovieDetails(movieId) {
     movieDetailsContent.innerHTML = `<p>Gagal memuat detail film: ${error.message}</p>`;
   }
 }
+
+// Tutup modal saat tombol close diklik
+closeModalButton.addEventListener('click', () => {
+  movieDetailsModal.classList.remove('show'); // Sembunyikan modal
+});
+
+// Tutup modal saat mengklik di luar area konten modal
+window.addEventListener('click', (event) => {
+  if (event.target === movieDetailsModal) {
+    movieDetailsModal.classList.remove('show');
+  }
+});
