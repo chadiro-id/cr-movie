@@ -46,3 +46,27 @@ async function searchMovies(query) {
     movieResultsContainer.innerHTML = `<p>Terjadi kesalahan saat mencari film: ${error.message}</p>`;
   }
 }
+
+function displayMovies(movies) {
+  movieResultsContainer.innerHTML = ''; // Kosongkan kontainer hasil sebelumnya
+  movies.forEach(movie => {
+    const movieCard = document.createElement('div');
+    movieCard.classList.add('movie-card'); // Tambahkan class untuk styling
+    // Gunakan path gambar dari TMDb, jika poster tidak ada, pakai placeholder
+    const posterPath = movie.poster_path 
+      ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` 
+      : 'https://via.placeholder.com/200x300?text=No+Poster'; // Placeholder image
+    movieCard.innerHTML = `
+      <img src="${posterPath}" alt="${movie.title} Poster">
+      <h3>${movie.title}</h3>
+      <p>${movie.release_date ? movie.release_date.substring(0, 4) : 'N/A'}</p>
+    `;
+    
+    movieCard.addEventListener('click', () => {
+      // Kita akan tambahkan fungsi untuk menampilkan detail film di sini nanti
+      showMovieDetails(movie.id); 
+    });
+    
+    movieResultsContainer.appendChild(movieCard);
+  });
+}
