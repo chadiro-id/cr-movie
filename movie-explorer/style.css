@@ -119,3 +119,22 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+.detail-poster {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Menghilangkan spasi ekstra di bawah gambar */
+  margin: 0 auto 20px auto; /* Pusatkan gambar dan beri margin bawah */
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
