@@ -70,3 +70,39 @@ function displayMovies(movies) {
     movieResultsContainer.appendChild(movieCard);
   });
 }
+
+async function showMovieDetails(movieId) {
+  // Tampilkan modal dan loading state di dalamnya
+  movieDetailsModal.classList.add('show'); // Tampilkan modal
+  movieDetailsContent.innerHTML = '<p>Memuat detail film...</p>';
+  
+  try {
+    const response = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const movie = await response.json(); // Data detail film
+    
+    // Format data agar lebih mudah dibaca
+    const genres = movie.genres.map(genre => genre.name).join(', ');
+    const runtime = movie.runtime ? `${Math.floor(movie.runtime / 60)}j ${movie.runtime % 60}m` : 'N/A';
+    const posterPath = movie.poster_path 
+      ? `https://image.tmdb.org/t/p/w400${movie.poster_path}` // Ukuran poster lebih besar
+      : 'https://via.placeholder.com/400x600?text=No+Poster';
+    
+    movieDetailsContent.innerHTML = `
+      <img src="${posterPath}" alt="${movie.title} Poster" class="detail-poster">
+      <h2>${movie.title} (${movie.release_date ? movie.release_date.substring(0, 4) : 'N/A'})</h2>
+      <p><strong>Rating:</strong> ${movie.vote_average ?? movie.vote_average.toFixed(1)}/10 (${movie.vote_count} votes)</p>
+      <p><strong>Genre:</strong> ${genres || 'N/A'}</p>
+      <p><strong>Durasi:</strong> ${runtime}</p>
+      <p><strong>Plot:</strong> ${movie.overview || 'Sinopsis tidak tersedia.'}</p>
+      ${movie.tagline ? `<p><em>"${movie.tagline}"</em></p>` : ''}
+    `;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+    movieDetailsContent.innerHTML = `<p>Gagal memuat detail film: ${error.message}</p>`;
+  }
+}
