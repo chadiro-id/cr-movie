@@ -23,3 +23,26 @@ searchForm.addEventListener('submit', function(event) {
     alert('Mohon masukkan nama film untuk dicari!');
   }
 });
+
+async function searchMovies(query) {
+  // Tampilkan loading state
+  movieResultsContainer.innerHTML = '<p>Mencari film...</p>';
+  
+  try {
+    const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
+    // Cek apakah respons OK (status 200)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json(); // Parse respons JSON
+    if (data.results.length > 0) {
+      displayMovies(data.results); // Tampilkan film jika ditemukan
+    } else {
+      movieResultsContainer.innerHTML = '<p>Tidak ada film ditemukan dengan kata kunci tersebut.</p>';
+    }
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+    movieResultsContainer.innerHTML = `<p>Terjadi kesalahan saat mencari film: ${error.message}</p>`;
+  }
+}
