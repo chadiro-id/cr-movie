@@ -7,8 +7,7 @@ const movieDetailsContent = document.getElementById('movie-details-content');
 const closeModalButton = document.getElementById('close-modal');
 
 // API Key TMDb Anda (Sangat penting: JANGAN PERNAH menyertakan API Key sensitif di kode front-end untuk proyek produksi sungguhan!)
-// Untuk proyek belajar ini, kita akan taruh langsung di sini, tapi di dunia nyata, ini harus disimpan di server.
-const API_KEY = '42c23ce491ac261f4ddfe53b6cf6b2d5'; 
+const API_KEY = 'YOUR_TMDB_API_KEY'; 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 // Tangani event submit pada form pencarian
