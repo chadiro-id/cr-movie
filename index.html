@@ -3,9 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CR Movie</title>
+  <title>CR Movie - Simple Movie Explorer</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  
+  <h1>Movie Explorer</h1>
+  <form id="search-form">
+    <input type="text" id="search-input" placeholder="Cari film..." />
+    <button type="submit">Cari</button>
+  </form>
+  <div id="movie-results-container"></div>
+  <div id="movie-details-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="close-modal">&times;</span>
+      <div id="movie-details-content"></div>
+    </div>
+  </div>
+  <script src="./script.js"></script>
 </body>
 </html>
